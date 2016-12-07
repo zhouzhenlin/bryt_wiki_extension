@@ -4,10 +4,10 @@
 require 'redmine'
 require 'open-uri'
 
-Redmine::Plugin.register :wiki_html do
-  name 'Redmine Wiki HTML Util'
+Redmine::Plugin.register :bryt_wiki_extension do
+  name 'Bryt Redmine Wiki Extension'
   author 'Arlo Carreon, Bryt Li'
-  author_url 'https://github.com/bryt-li/wiki-html.git'
+  author_url 'https://github.com/bryt-li/bryt_wiki_extension.git'
   description 'Allows you to embedd RAW HTML into your wiki, load stylesheets and javascript.  Made for html/css/js demo wikis'
   version '0.0.1'
 
