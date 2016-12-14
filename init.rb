@@ -30,7 +30,7 @@ Redmine::Plugin.register :bryt_wiki_extension do
       raise 'Page not found' if page.nil?
 
       content = text || args 
-      content = "<style type=\"text/css\">"+content+"</style>"        
+      content = '<style type="text/css">'+content+'</style>'
       result = "#{ CGI::unescapeHTML(content) }".html_safe
       return result
     end 
@@ -48,67 +48,18 @@ Redmine::Plugin.register :bryt_wiki_extension do
     end 
   end
         
-        Redmine::WikiFormatting::Macros.register do
-          desc "Embed raw js"
-          macro :js, :parse_args => false do |obj, args, text|
-            page = obj.page
-            raise 'Page not found' if page.nil?
+  Redmine::WikiFormatting::Macros.register do
+    desc "Embed raw js"
+    macro :js, :parse_args => false do |obj, args, text|
+      page = obj.page
+      raise 'Page not found' if page.nil?
 
-            content = text || args
-            content = "<script>"+content+"</script>"
-            result = "#{ CGI::unescapeHTML(content) }".html_safe
-     	      return result
-          end 
-        end
-
-        Redmine::WikiFormatting::Macros.register do
-          desc "Embed raw babel"
-          macro :babel, :parse_args => false do |obj, args, text|
-            page = obj.page
-            raise 'Page not found' if page.nil?
-
-            content = text || args 
-            content = '<script type="text/babel">'+content+"</script>"
-            result = "#{ CGI::unescapeHTML(content) }".html_safe
-            return result
-          end
-        end
-
-        Redmine::WikiFormatting::Macros.register do
-          desc "Import react js"
-          macro :import_react, :parse_args => false do |obj, args, text|
-            page = obj.page
-            raise 'Page not found' if page.nil?
-
-            content = '<script src="/plugin_assets/wiki_html/react.min.js"></script><script src="/plugin_assets/wiki_html/react-dom.min.js"></script><script src="/plugin_assets/wiki_html/browser.min.js"></script>'
-            result = "#{ CGI::unescapeHTML(content) }".html_safe
-            return result
-          end
-        end
-
-        Redmine::WikiFormatting::Macros.register do
-          desc "Import p5 js"
-          macro :import_p5, :parse_args => false do |obj, args, text|
-            page = obj.page
-            raise 'Page not found' if page.nil?
-
-            content = '<script src="/plugin_assets/wiki_html/p5.min.js"></script><script src="/plugin_assets/wiki_html/react-dom.min.js"></script><script src="/plugin_assets/wiki_html/browser.min.js"></script>'
-            result = "#{ CGI::unescapeHTML(content) }".html_safe
-            return result
-          end
-        end
-
-        Redmine::WikiFormatting::Macros.register do
-          desc "Import antd"
-          macro :import_antd, :parse_args => false do |obj, args, text|
-            page = obj.page
-            raise 'Page not found' if page.nil?
-
-            content = '<script src="/plugin_assets/wiki_html/antd.min.js"></script><script> var head = document.getElementsByTagName("head")[0], t = document.createElement("link"); t.href = "/plugin_assets/wiki_html/antd.min.css"; t.media="all"; t.rel="stylesheet"; head.appendChild(t); </script>'
-            result = "#{ CGI::unescapeHTML(content) }".html_safe
-            return result
-          end
-        end
+      content = text || args
+      content = "<script>"+content+"</script>"
+      result = "#{ CGI::unescapeHTML(content) }".html_safe
+	      return result
+    end 
+  end
 
   Redmine::WikiFormatting::Macros.register do
     desc "Insert a JS file into the DOM\nUsage:\n<pre>{{js_url(http://js.url)}}</pre>"
@@ -116,10 +67,75 @@ Redmine::Plugin.register :bryt_wiki_extension do
       page = obj.page
       raise 'Page not found' if page.nil?
 
-      result = "<script> var head = document.getElementsByTagName('head')[0], t = document.createElement('script'); t.src = "+args[0]+"; t.type='text/javascript'; head.appendChild(t); </script>"
-    	result = "#{ CGI::unescapeHTML(result) }".html_safe        
-	    return result
+      result = "<script> var head = document.getElementsByTagName('head')[0]; var t = document.createElement('script'); t.src = "+args[0]+"; t.type='text/javascript'; head.appendChild(t); </script>"
+      result = "#{ CGI::unescapeHTML(result) }".html_safe        
+      return result
     end 
   end
+
+  Redmine::WikiFormatting::Macros.register do
+    desc "Embed raw babel"
+    macro :babel, :parse_args => false do |obj, args, text|
+      page = obj.page
+      raise 'Page not found' if page.nil?
+
+      content = text || args 
+      content = '<script type="text/babel">'+content+"</script>"
+      result = "#{ CGI::unescapeHTML(content) }".html_safe
+      return result
+    end
+  end
+
+  Redmine::WikiFormatting::Macros.register do
+    desc "Import react js"
+    macro :import_react, :parse_args => false do |obj, args, text|
+      page = obj.page
+      raise 'Page not found' if page.nil?
+
+      if false
+        content = '<script> var head = document.getElementsByTagName("head")[0], '
+        content = content + 't = document.createElement("script"); t.src ="/plugin_assets/bryt_wiki_extension/react.min.js"; t.type="text/javascript"; head.appendChild(t); '
+        content = content + 't = document.createElement("script"); t.src ="/plugin_assets/bryt_wiki_extension/react-dom.min.js"; t.type="text/javascript"; head.appendChild(t); '
+        content = content + 't = document.createElement("script"); t.src ="/plugin_assets/bryt_wiki_extension/browser.min.js"; t.type="text/javascript"; head.appendChild(t); '
+        content = content + '</script>'
+      end
+
+      content = '<script src="/plugin_assets/bryt_wiki_extension/react.min.js"></script>'
+      content = content + '<script src="/plugin_assets/bryt_wiki_extension/react-dom.min.js"></script>'
+      content = content + '<script src="/plugin_assets/bryt_wiki_extension/browser.min.js"></script>'
+
+      result = "#{ CGI::unescapeHTML(content) }".html_safe
+      return result
+    end
+  end
+
+  Redmine::WikiFormatting::Macros.register do
+    desc "Enable p5 js draw library"
+    macro :enable_p5, :parse_args => false do |obj, args, text|
+      page = obj.page
+      raise 'Page not found' if page.nil?
+
+      result = '<script> var head = document.getElementsByTagName("head")[0], t = document.createElement("script"); t.src ="/plugin_assets/bryt_wiki_extension/p5.min.js"; t.type="text/javascript"; head.appendChild(t); </script>'
+      result = "#{ CGI::unescapeHTML(result) }".html_safe
+      return result
+    end
+  end
+
+  Redmine::WikiFormatting::Macros.register do
+    desc "Import antd"
+    macro :import_antd, :parse_args => false do |obj, args, text|
+      page = obj.page
+      raise 'Page not found' if page.nil?
+
+      content = '<script> var head = document.getElementsByTagName("head")[0], '
+      content = content + 't = document.createElement("link"); t.href ="/plugin_assets/bryt_wiki_extension/antd.min.css"; t.media="all"; t.rel="stylesheet"; head.appendChild(t); '
+      content = content + '</script>'
+      content = content + '<script src="/plugin_assets/bryt_wiki_extension/antd.min.js"></script>'
+
+      result = "#{ CGI::unescapeHTML(content) }".html_safe
+      return result
+    end
+  end
+
         
 end
