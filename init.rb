@@ -17,49 +17,34 @@ Redmine::Plugin.register :bryt_wiki_extension do
       page = obj.page
       raise 'Page not found' if page.nil?
 
-      # For security, only allow insertion on protected (locked) wiki pages
-      if page.protected
-        content = text || args 
-        result = "#{ CGI::unescapeHTML(content) }".html_safe
-	      return result
-      else
-        return "<!-- Macro removed due to wiki page being unprotected -->"
-      end
+      content = text || args 
+      result = "#{ CGI::unescapeHTML(content) }".html_safe
+      return result
     end 
   end
         
-        Redmine::WikiFormatting::Macros.register do
+  Redmine::WikiFormatting::Macros.register do
     desc "Embed raw css"
     macro :css, :parse_args => false do |obj, args, text|
       page = obj.page
       raise 'Page not found' if page.nil?
 
-      # For security, only allow insertion on protected (locked) wiki pages
-      if page.protected 
-        content = text || args 
-        content = "<style type=\"text/css\">"+content+"</style>"        
-        result = "#{ CGI::unescapeHTML(content) }".html_safe
-        return result
-      else
-        return "<!-- Macro removed due to wiki page being unprotected -->"
-      end
+      content = text || args 
+      content = "<style type=\"text/css\">"+content+"</style>"        
+      result = "#{ CGI::unescapeHTML(content) }".html_safe
+      return result
     end 
   end
         
-        Redmine::WikiFormatting::Macros.register do
+  Redmine::WikiFormatting::Macros.register do
     desc "Insert a CSS file into the DOM\nUsage:\n<pre>{{css_url(http://css.url)}}</pre>"
     macro :css_url do |obj, args|
       page = obj.page
       raise 'Page not found' if page.nil?
 
-      # For security, only allow insertion on protected (locked) wiki pages
-      if page.protected 
-        result = "<script> var head = document.getElementsByTagName('head')[0], t = document.createElement('link'); t.href = "+args[0]+"; t.media='all'; t.rel='stylesheet'; head.appendChild(t); </script>"
-        result = "#{ CGI::unescapeHTML(result) }".html_safe
-	      return result
-      else
-        return "<!-- Macro removed due to wiki page being unprotected -->"
-      end
+      result = "<script> var head = document.getElementsByTagName('head')[0], t = document.createElement('link'); t.href = "+args[0]+"; t.media='all'; t.rel='stylesheet'; head.appendChild(t); </script>"
+      result = "#{ CGI::unescapeHTML(result) }".html_safe
+      return result
     end 
   end
         
@@ -69,15 +54,10 @@ Redmine::Plugin.register :bryt_wiki_extension do
             page = obj.page
             raise 'Page not found' if page.nil?
 
-            # For security, only allow insertion on protected (locked) wiki pages
-            if page.protected
-              content = text || args
-              content = "<script>"+content+"</script>"
-              result = "#{ CGI::unescapeHTML(content) }".html_safe
-      	     return result
-            else
-              return "<!-- Macro removed due to wiki page being unprotected -->"
-            end
+            content = text || args
+            content = "<script>"+content+"</script>"
+            result = "#{ CGI::unescapeHTML(content) }".html_safe
+     	      return result
           end 
         end
 
@@ -87,15 +67,10 @@ Redmine::Plugin.register :bryt_wiki_extension do
             page = obj.page
             raise 'Page not found' if page.nil?
 
-            # For security, only allow insertion on protected (locked) wiki pages
-            if page.protected
-              content = text || args 
-              content = '<script type="text/babel">'+content+"</script>"
-              result = "#{ CGI::unescapeHTML(content) }".html_safe
-              return result
-            else
-              return "<!-- Macro removed due to wiki page being unprotected -->"
-            end
+            content = text || args 
+            content = '<script type="text/babel">'+content+"</script>"
+            result = "#{ CGI::unescapeHTML(content) }".html_safe
+            return result
           end
         end
 
@@ -105,14 +80,21 @@ Redmine::Plugin.register :bryt_wiki_extension do
             page = obj.page
             raise 'Page not found' if page.nil?
 
-            # For security, only allow insertion on protected (locked) wiki pages
-            if page.protected
-              content = '<script src="/plugin_assets/wiki_html/react.min.js"></script><script src="/plugin_assets/wiki_html/react-dom.min.js"></script><script src="/plugin_assets/wiki_html/browser.min.js"></script>'
-              result = "#{ CGI::unescapeHTML(content) }".html_safe
-              return result
-            else
-              return "<!-- Macro removed due to wiki page being unprotected -->"
-            end
+            content = '<script src="/plugin_assets/wiki_html/react.min.js"></script><script src="/plugin_assets/wiki_html/react-dom.min.js"></script><script src="/plugin_assets/wiki_html/browser.min.js"></script>'
+            result = "#{ CGI::unescapeHTML(content) }".html_safe
+            return result
+          end
+        end
+
+        Redmine::WikiFormatting::Macros.register do
+          desc "Import p5 js"
+          macro :import_p5, :parse_args => false do |obj, args, text|
+            page = obj.page
+            raise 'Page not found' if page.nil?
+
+            content = '<script src="/plugin_assets/wiki_html/p5.min.js"></script><script src="/plugin_assets/wiki_html/react-dom.min.js"></script><script src="/plugin_assets/wiki_html/browser.min.js"></script>'
+            result = "#{ CGI::unescapeHTML(content) }".html_safe
+            return result
           end
         end
 
@@ -122,31 +104,21 @@ Redmine::Plugin.register :bryt_wiki_extension do
             page = obj.page
             raise 'Page not found' if page.nil?
 
-            # For security, only allow insertion on protected (locked) wiki pages
-            if page.protected
-              content = '<script src="/plugin_assets/wiki_html/antd.min.js"></script><script> var head = document.getElementsByTagName("head")[0], t = document.createElement("link"); t.href = "/plugin_assets/wiki_html/antd.min.css"; t.media="all"; t.rel="stylesheet"; head.appendChild(t); </script>'
-              result = "#{ CGI::unescapeHTML(content) }".html_safe
-              return result
-            else
-              return "<!-- Macro removed due to wiki page being unprotected -->"
-            end
+            content = '<script src="/plugin_assets/wiki_html/antd.min.js"></script><script> var head = document.getElementsByTagName("head")[0], t = document.createElement("link"); t.href = "/plugin_assets/wiki_html/antd.min.css"; t.media="all"; t.rel="stylesheet"; head.appendChild(t); </script>'
+            result = "#{ CGI::unescapeHTML(content) }".html_safe
+            return result
           end
         end
-        
-        Redmine::WikiFormatting::Macros.register do
+
+  Redmine::WikiFormatting::Macros.register do
     desc "Insert a JS file into the DOM\nUsage:\n<pre>{{js_url(http://js.url)}}</pre>"
     macro :js_url do |obj, args|
       page = obj.page
       raise 'Page not found' if page.nil?
 
-      # For security, only allow insertion on protected (locked) wiki pages
-      if page.protected 
-        result = "<script> var head = document.getElementsByTagName('head')[0], t = document.createElement('script'); t.src = "+args[0]+"; t.type='text/javascript'; head.appendChild(t); </script>"
-	result = "#{ CGI::unescapeHTML(result) }".html_safe        
-	return result
-      else
-        return "<!-- Macro removed due to wiki page being unprotected -->"
-      end
+      result = "<script> var head = document.getElementsByTagName('head')[0], t = document.createElement('script'); t.src = "+args[0]+"; t.type='text/javascript'; head.appendChild(t); </script>"
+    	result = "#{ CGI::unescapeHTML(result) }".html_safe        
+	    return result
     end 
   end
         
