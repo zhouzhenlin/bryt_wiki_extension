@@ -113,7 +113,11 @@ Redmine::Plugin.register :bryt_wiki_extension do
     desc "Import gantt"
     macro :import_gantt, :parse_args => false do |obj, args, text|
       content = '<script> var head = document.getElementsByTagName("head")[0], '
-      content = content + 't = document.createElement("link"); t.href ="/plugin_assets/bryt_wiki_extension/dhtmlxgantt.css"; t.media="all"; t.rel="stylesheet"; head.appendChild(t); '
+      if args
+        content = content + "t = document.createElement(\"link\"); t.href =\"/plugin_assets/bryt_wiki_extension/skins/dhtmlxgantt_#{args}.css\"; t.media=\"all\"; t.rel=\"stylesheet\"; head.appendChild(t); "
+      else 
+        content = content + 't = document.createElement("link"); t.href ="/plugin_assets/bryt_wiki_extension/dhtmlxgantt.css"; t.media="all"; t.rel="stylesheet"; head.appendChild(t); '
+      end
       content = content + '</script>'
       content = content + '<script src="/plugin_assets/bryt_wiki_extension/dhtmlxgantt.js"></script>'
       content = content + '<script src="/plugin_assets/bryt_wiki_extension/dhtmlxgantt_locale_cn.js"></script>'
