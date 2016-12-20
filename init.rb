@@ -120,6 +120,7 @@ Redmine::Plugin.register :bryt_wiki_extension do
       end
       content = content + '</script>'
       content = content + '<script src="/plugin_assets/bryt_wiki_extension/dhtmlxgantt.js"></script>'
+      content = content + '<script src="/plugin_assets/bryt_wiki_extension/ext/dhtmlxgantt_marker.js"></script>'
       content = content + '<script src="/plugin_assets/bryt_wiki_extension/dhtmlxgantt_locale_cn.js"></script>'
 
       result = "#{ CGI::unescapeHTML(content) }".html_safe
