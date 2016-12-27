@@ -138,10 +138,8 @@ Redmine::Plugin.register :bryt_wiki_extension do
 
         $(this).click(function(e){
             $('#linked_img img').attr('src',img).css('width',width-30).css('height',height-60);
-            if(wiki){
-               wiki = '/projects/'+project+'/wiki/'+wiki;
-               $('#linked_img').attr('href',wiki);
-            }
+            if(wiki)
+               $('#linked_img').attr('href','/projects/'+project+'/wiki/'+wiki);
             else
                $('#linked_img').attr('href','#');
 
