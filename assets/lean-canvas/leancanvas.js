@@ -56,6 +56,15 @@ colspan: 5 }
 ]
 ];
 
+$('#btn_help').click(function(e){
+            $('#dialog_help').dialog({
+               width: 750,
+               height: 580,
+               modal: true});
+            e.preventDefault();  
+});
+
+
 var app = angular.module('BusinessModelCanvas', ['ui.keypress', 'LocalStorageModule', 'ngTouch'])
 .config(function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('bmc');

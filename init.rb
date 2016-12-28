@@ -164,6 +164,10 @@ Redmine::Plugin.register :bryt_wiki_extension do
     macro :import_lean_canvas, :parse_args => false do |obj, args, text|
 
       html = <<-eos
+<div id="dialog_help" title="LeanCanvas帮助" style="display:none;">
+  <img src="/plugin_assets/bryt_wiki_extension/lean-canvas/help.png"/>
+</div>
+
 <div ng-app="BusinessModelCanvas" ng-controller="RootController" id="lean_canvas" class="container">
       <div class="row">
         <div class="col-md-4 title">
@@ -172,12 +176,13 @@ Redmine::Plugin.register :bryt_wiki_extension do
                     <button ng-click="archiveDoc()">保存</button>
                     <button ng-click="loadHistory()">加载</button>
                     <button ng-click="clearAll()">重置</button>
+                    <button id="btn_help">帮助</button>
                 </p>
             </div>
         </div>
     </div>
     <div class="row">
-        <table class="table table-bordered canvas-table">
+        <table class="table table-bordered canvas-table" style="border:3px #000 solid;">
             <tbody>
             <tr ng-repeat="row in tableLayout">
                 <td ng-repeat="cell in row"
@@ -186,11 +191,13 @@ Redmine::Plugin.register :bryt_wiki_extension do
                     ng-class="{'tall-cell':  cell.rowspan == 2,
                                'short-cell': cell.rowspan == 1}"
                     rowspan="{{cell.rowspan}}"
-                    colspan="{{cell.colspan}}">
+                    colspan="{{cell.colspan}}"
+                    style="border:2px #000 solid;"
+                    >
                     <div class="table-cell">
                         <span class="canvas-cell-image glyphicon"
                               ng-class="'glyphicon-' + cell.icon"></span>
-                        <span>{{cell.title}}</span>
+                        <span class="cell-title">{{cell.title}}</span>
 
                         <ul>
                             <li ng-repeat="item in doc.sections[cell.key]">
