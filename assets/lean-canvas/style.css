@@ -39,3 +39,14 @@ td.short-cell {
 	font-size: 1.5em;
 	font-weight: bold;
 }
+
+
+.lean-note{
+	text-align: right;
+}
+
+.lean-note span{
+	font-size: 1.5em;
+	font-weight: bolder;
+	margin-right:2em;
+}

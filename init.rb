@@ -197,7 +197,7 @@ Redmine::Plugin.register :bryt_wiki_extension do
                     <div class="table-cell">
                         <span class="canvas-cell-image glyphicon"
                               ng-class="'glyphicon-' + cell.icon"></span>
-                        <span class="cell-title">{{cell.title}}</span>
+                        <span class="cell-title" style="color:{{cell.color}}">{{cell.title}}</span>
 
                         <ul>
                             <li ng-repeat="item in doc.sections[cell.key]">
@@ -213,6 +213,11 @@ Redmine::Plugin.register :bryt_wiki_extension do
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row lean-note">
+      <span style="color:red;">A-产品风险</span>
+      <span style="color:purple;">B-客户风险</span>
+      <span style="color:green;">C-市场风险</span>
     </div>
 </div>
       eos

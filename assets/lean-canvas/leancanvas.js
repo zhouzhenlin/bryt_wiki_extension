@@ -1,59 +1,78 @@
 var tableLayout = [
 [
-{ title: "问题",
-icon: "link",
-key: "problem",
-rowspan: 2,
-colspan: 2 },
-
-{ title: "解决方案",
-icon: "check",
-key: "solution",
-rowspan: 1,
-colspan: 2 },
-
-{ title: "独特卖点",
-icon: "gift",
-key: "valuePropositions",
-rowspan: 2,
-colspan: 2 },
-
-{ title: "门槛优势",
-icon: "heart",
-key: "unfariAdvantage",
-rowspan: 1,
-colspan: 2 },
-
-{ title: "客户群体分类",
-icon: "user",
-key: "customerSegments",
-rowspan: 2,
-colspan: 2 }
-], [
-{ title: "关键指标",
-icon: "tree-deciduous",
-key: "keyResources",
-rowspan: 1,
-colspan: 2 },
-
-{ title: "渠道",
-icon: "send",
-key: "channels",
-rowspan: 1,
-colspan: 2 }
-], [
-{ title: "成本结构",
-icon: "tags",
-key: "costStructure",
-rowspan: 1,
-colspan: 5 },
-
-{ title: "收入来源",
-icon: "usd",
-key: "revenueStreams",
-rowspan: 1,
-colspan: 5 }
-]
+{ 
+  title: "A.1 问题",
+  color: "red",
+  icon: "link",
+  key: "problem",
+  rowspan: 2,
+  colspan: 2 
+},
+{
+  title: "A.4 解决方案",
+  color: "red",
+  icon: "check",
+  key: "solution",
+  rowspan: 1,
+  colspan: 2 
+},
+{
+  title: "A.3 独特卖点",
+  color: "red",
+  icon: "gift",
+  key: "valuePropositions",
+  rowspan: 2,
+  colspan: 2 
+},
+{
+  title: "9 门槛优势",
+  color: "black",
+  icon: "heart",
+  key: "unfariAdvantage",
+  rowspan: 1,
+  colspan: 2
+},
+{
+  title: "B.2 客户群体分类",
+  color: "purple",
+  icon: "user",
+  key: "customerSegments",
+  rowspan: 2,
+  colspan: 2 
+}],
+[
+{
+  title: "A.8 关键指标",
+  color: "red",
+  icon: "tree-deciduous",
+  key: "keyResources",
+  rowspan: 1,
+  colspan: 2 
+},
+{
+  title: "B.5 渠道",
+  color: "purple",
+  icon: "send",
+  key: "channels",
+  rowspan: 1,
+  colspan: 2 
+}],
+[{
+  title: "C.7 成本结构",
+  color: "green",
+  icon: "tags",
+  key: "costStructure",
+  rowspan: 1,
+  colspan: 5 
+},
+{
+  title: "C.6 收入来源",
+  color: "green",
+  icon: "usd",
+  key: "revenueStreams",
+  rowspan: 1,
+  colspan: 5 
+}]
 ];
 
 $('#btn_help').click(function(e){
