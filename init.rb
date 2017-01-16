@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # vendor/plugins/redmine_wiki_html_util/init.rb
 #
@@ -169,7 +170,7 @@ Redmine::Plugin.register :bryt_wiki_extension do
 </div>
 
 <div ng-app="BusinessModelCanvas" ng-controller="RootController" id="lean_canvas" class="container">
-      <div class="row">
+    <div class="row">
         <div class="col-md-4 title">
             <div class='row'>
                 <p>

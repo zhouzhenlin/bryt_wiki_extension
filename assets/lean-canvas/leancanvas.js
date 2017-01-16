@@ -76,11 +76,11 @@ var tableLayout = [
 ];
 
 $('#btn_help').click(function(e){
-            $('#dialog_help').dialog({
-               width: 750,
-               height: 580,
-               modal: true});
-            e.preventDefault();  
+  $('#dialog_help').dialog({
+     width: 750,
+     height: 580,
+     modal: true});
+  e.preventDefault();  
 });
 
 
