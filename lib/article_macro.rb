@@ -24,6 +24,13 @@ module WikiMacro
    table h3{
         text-indent:1em;
    }
+
+   .part{
+   		text-indent:0!important;
+   		font-size:2.5em;
+   		font-weight:bold;
+   		text-align:center;
+   }
 }
 @media screen {
   #Container thead, #Container tfoot {
@@ -109,5 +116,14 @@ eos
 
 	    end
 	end
-  
+
+	Redmine::WikiFormatting::Macros.register do
+	    desc "Article part"
+	    macro :part, :parse_args => false do |obj, args, text|
+	    	content = "<p class=\"part\">#{args}</p>"
+		    result = "#{ CGI::unescapeHTML(content) }".html_safe
+	    	return result
+		end
+	end
+
 end
