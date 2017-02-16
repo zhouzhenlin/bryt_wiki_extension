@@ -24,10 +24,9 @@ module WikiMacro
    table h3{
         text-indent:1em;
    }
-
    .part{
    		text-indent:0!important;
-   		font-size:2.5em;
+   		font-size:2.2em;
    		font-weight:bold;
    		text-align:center;
    }
@@ -87,6 +86,11 @@ eos
 	    desc "Mark article for print end"
 	    macro :article_end, :parse_args => false do |obj, args, text|
 	      	js = <<-eos
+
+$('#Container img').each(function(index,element){
+  element.parentNode.setAttribute('style','text-align:center;width:100%;');
+});
+
 var node = $('#Container h1:first').get(0);
 var h1=0;
 var h2=0;
