@@ -14,7 +14,8 @@ module WikiMacro
       project_id = obj.page.project.id
       project_id = args[3].strip if args[3]
 
-      scrolling = 'auto'
+      scrolling = 'no'
+      scrolling = args[4].strip if args[4]
 
       url = "/projects/#{project_id}/wiki/#{wiki}"
       o = ''
