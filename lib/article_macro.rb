@@ -30,6 +30,16 @@ module WikiMacro
    		font-weight:bold;
    		text-align:center;
    }
+   .term_container{
+      clear:both;
+   }
+   .term_number{
+      float:left;
+      width: 4em;
+   }
+   .term{
+      float:left;
+   }
 }
 @media screen {
   #Container thead, #Container tfoot {
@@ -86,6 +96,11 @@ eos
 	    desc "Mark article for print end"
 	    macro :article_end, :parse_args => false do |obj, args, text|
 	      	js = <<-eos
+var numbers = ['一','二','三','四','五','六','七','八','九','十'];
+
+$('.term').each(function(index,element){
+
+});
 
 $('#Container img').each(function(index,element){
   element.parentNode.setAttribute('style','text-align:center;width:100%;');
@@ -129,5 +144,14 @@ eos
 	    	return result
 		end
 	end
+
+  Redmine::WikiFormatting::Macros.register do
+      desc "Article term"
+      macro :term, :parse_args => false do |obj, args, text|
+        content = "<div class=\"term_container\"><div class=\"term_number\"></div><div><p class=\"term\">#{args}</p></div></div>"
+        result = "#{ CGI::unescapeHTML(content) }".html_safe
+        return result
+    end
+  end
 
 end
