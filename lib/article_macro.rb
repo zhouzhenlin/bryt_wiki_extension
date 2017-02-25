@@ -15,8 +15,8 @@ module WikiMacro
         border:none!important;
    }
    table p{
-        margin: 12px 0!important;
         text-indent:2em;
+        line-height:1.5em;
    }
    table h2{
         text-indent:0.5em;
@@ -25,20 +25,23 @@ module WikiMacro
         text-indent:1em;
    }
    .part{
-   		text-indent:0!important;
+      margin: 0 auto 0 auto;
    		font-size:2.2em;
    		font-weight:bold;
+      line-height: 2em;
    		text-align:center;
    }
    .term_container{
-      clear:both;
+      margin: 10px 0 10px 0;
    }
    .term_number{
       float:left;
       width: 4em;
+      line-height:1.5em;
    }
    .term{
       float:left;
+      width: 41em;
    }
 }
 @media screen {
@@ -81,9 +84,9 @@ module WikiMacro
 }
 eos
 
-			headerHtml = "<thead class=\"Header\"><tr><td>#{header}<hr /></td></tr></thead>"
-			footerHtml = "<tfoot><tr><td><hr /><span>#{footer}</span><span class=\"PageNum\"></span></td></tr></tfoot>"
-			body = "<table id=\"Container\"> #{headerHtml} #{footerHtml} <tbody><tr><td>"
+  			headerHtml = "<thead class=\"Header\"><tr><td>#{header}<hr /></td></tr></thead>"
+  			footerHtml = "<tfoot><tr><td><hr /><span>#{footer}</span><span class=\"PageNum\"></span></td></tr></tfoot>"
+  			body = "<table id=\"Container\"> #{headerHtml} #{footerHtml} <tbody><tr><td>"
 
 		    content = "<style type=\"text/css\">#{style}</style>" + body;
 
@@ -95,11 +98,25 @@ eos
 	Redmine::WikiFormatting::Macros.register do
 	    desc "Mark article for print end"
 	    macro :article_end, :parse_args => false do |obj, args, text|
-	      	js = <<-eos
-var numbers = ['一','二','三','四','五','六','七','八','九','十'];
 
-$('.term').each(function(index,element){
+        part = args
 
+        js = "var part = \"#{part}\";"
+      	js = js + <<-eos
+var numbers = [
+  '一','二','三','四','五','六','七','八','九','十',
+  '十一','十二','十三','十四','十五','十六','十七','十八','十九','二十',
+  '二十一','二十二','二十三','二十四','二十五','二十六','二十七','二十八','二十九','三十',
+  '三十一','三十二','三十三','三十四','三十五','三十六','三十七','三十八','三十九','四十',
+  '四十一','四十二','四十三','四十四','四十五','四十六','四十七','四十八','四十九','五十'];
+
+$('.part').each(function(index,element){
+  element.innerText = '第' + numbers[index] + part + ' ' + element.innerText;
+});
+
+
+$('.term_number').each(function(index,element){
+  element.innerText = '第' + numbers[index] + '条' + element.innerText;
 });
 
 $('#Container img').each(function(index,element){
@@ -139,7 +156,7 @@ eos
 	Redmine::WikiFormatting::Macros.register do
 	    desc "Article part"
 	    macro :part, :parse_args => false do |obj, args, text|
-	    	content = "<p class=\"part\">#{args}</p>"
+	    	content = "<div class=\"part\">#{args}</div>"
 		    result = "#{ CGI::unescapeHTML(content) }".html_safe
 	    	return result
 		end
@@ -148,7 +165,7 @@ eos
   Redmine::WikiFormatting::Macros.register do
       desc "Article term"
       macro :term, :parse_args => false do |obj, args, text|
-        content = "<div class=\"term_container\"><div class=\"term_number\"></div><div><p class=\"term\">#{args}</p></div></div>"
+        content = "<div class=\"term_container\"><div class=\"term_number\"></div><div class=\"term\">#{args}</div><div style=\"clear:both;\"></div></div>"
         result = "#{ CGI::unescapeHTML(content) }".html_safe
         return result
     end
