@@ -41,7 +41,7 @@ module WikiMacro
    }
    .term{
       float:left;
-      width: 40em;
+      width: 34em;
    }
 }
 @media screen {
