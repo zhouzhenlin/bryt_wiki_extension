@@ -26,9 +26,9 @@ module WikiMacro
    }
    .part{
       margin: 0 auto 0 auto;
-   		font-size:2.2em;
+   		font-size:1.5em;
    		font-weight:bold;
-      line-height: 2em;
+      line-height: 1.6em;
    		text-align:center;
    }
    .term_container{
