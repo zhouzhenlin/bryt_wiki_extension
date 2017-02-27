@@ -36,12 +36,12 @@ module WikiMacro
    }
    .term_number{
       float:left;
-      width: 4em;
+      width: 6em;
       line-height:1.5em;
    }
    .term{
       float:left;
-      width: 41em;
+      width: 40em;
    }
 }
 @media screen {
